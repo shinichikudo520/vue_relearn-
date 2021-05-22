@@ -15,7 +15,8 @@
         <h1>当前计数：{{counter}}</h1>
         <!-- v-on绑定事件：v-on:指定事件名称 -->
         <button v-on:click="increment">+</button>
-        <button v-on:click="sub">-</button>
+        <!-- 语法糖：@事件名称 -->
+        <button @click="sub">-</button>
     </div>
     <script>
         const app = new Vue({
