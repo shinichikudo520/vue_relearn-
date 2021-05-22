@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        .red,.active {
+            color: red;
+        }
+        .normal {
+            color: blue;
+        }
+        .bigFont {
+            font-size: 24px;
+        }
+    </style>
+    <!-- 开发环境版本，包含了有帮助的命令行警告 -->
+    <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+</head>
+
+<body>
+    <div id="app">
+        <!-- 1. v-bind -->
+        <img v-bind:src="imgUrl" alt="">
+        <a v-bind:href="href">百度一下</a>
+        <!-- 语法糖 -->
+        <a :href="href">百度一下</a>
+        <div :class="className">
+            陈情令！！！
+        </div>
+        <!-- 2. 对象语法 -->
+        <!-- 类名可以绑定一个对象，:class="{class1:boolean,class2:boolean}"，通过控制类名是否为真，来控制是否添加该类名 -->
+        <!-- 动态绑定的class和固定class可以共存 -->
+        <div :class="{active:isActive,normal:isNormal}" class="bigFont">
+            陈情令！！！
+        </div>
+        <!-- 注意，此处的 getClasses 是一个方法，所以要带上()，v-on可以直接写函数名只是因为把()省略了 -->
+        <div :class="getClasses()" class="bigFont">
+            陈情令！！！
+        </div>
+        <button @click="btnClick">改变类名</button>
+        <!-- 3.数组语法 -->
+        <div :class="[className,'aaa','bbb']">
+            陈情令！！！
+        </div>
+    </div>
+    <script>
+        const app = new Vue({
+            el: '#app',
+            data: {
+                imgUrl:"https://gimg2.baidu.com/image_search/src=http%3A%2F%2F1812.img.pp.sohu.com.cn%2Fimages%2Fblog%2F2009%2F11%2F18%2F18%2F8%2F125b6560a6ag214.jpg&refer=http%3A%2F%2F1812.img.pp.sohu.com.cn&app=2002&size=f9999,10000&q=a80&n=0&g=0n&fmt=jpeg?sec=1624256872&t=48ba4ed967b175aaae19bcd45e0562f3",
+                href:'https://www.baidu.com',
+                className:'red',
+                isActive:false,
+                isNormal:true
+            },
+            methods: {
+                btnClick(){
+                    this.isNormal = !this.isNormal;
+                },
+                getClasses(){
+                    return {active:this.isActive,normal:this.isNormal}
+                }
+            },
+        });
+    </script>
+</body>
+
+</html>
