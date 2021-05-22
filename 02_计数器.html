@@ -12,14 +12,27 @@
 
 <body>
     <div id="app">
-
+        <h1>当前计数：{{counter}}</h1>
+        <!-- v-on绑定事件：v-on:指定事件名称 -->
+        <button v-on:click="increment">+</button>
+        <button v-on:click="sub">-</button>
     </div>
     <script>
         const app = new Vue({
             el: '#app',
             data: {
-
-            }
+                counter: 0,
+            },
+            methods: {
+                increment() {
+                    this.counter++;
+                    console.log('increment....');
+                },
+                sub() {
+                    this.counter--;
+                    console.log('sub....');
+                },
+            },
         });
     </script>
 </body>
