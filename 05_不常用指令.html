@@ -6,22 +6,38 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Document</title>
+    <style>
+        [v-cloak]{
+            display:none;
+        }
+    </style>
     <!-- 开发环境版本，包含了有帮助的命令行警告 -->
     <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
 </head>
 
 <body>
-    <div id="app">
+    <!-- 5. v-cloak：搭配样式使用，以防js代码被阻断导致页面数据加载不及时，出现闪烁，用户体验不佳 -->
+    <!-- 注意：vue实例化之后。所有绑定的指令都不会出现在浏览器渲染的页面代码中 -->
+    <div id="app" v-cloak>
+         <!-- 1. -->
         <div>{{message}}</div>
         <!-- 只会渲染一次数据，之后不会跟随数据的变化而变化 -->
         <div v-once>{{message}}</div>
-        <button @click="change">change</button>
+        <button @click="change">change message</button>
+        <!-- 2. -->
+        <div v-html="url"></div>
+        <!-- 3. -->
+        <div v-text="message"></div>
+        <!-- 4. 不解析{{}} -->
+        <div v-pre>{{message}}</div>
     </div>
     <script>
-        const app = new Vue({
+        setTimeout(() => {
+            const app = new Vue({
             el: '#app',
             data: {
                 message:'aaaa',
+                url:'<a href="https://www.baidu.com">百度一下</a>'
             },
             methods: {
                 change(){
@@ -29,6 +45,7 @@
                 }
             },
         });
+        }, 1000);
     </script>
 </body>
 
