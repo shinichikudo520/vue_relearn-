@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <!-- 开发环境版本，包含了有帮助的命令行警告 -->
+    <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+</head>
+
+<body>
+    <div id="app">
+
+    </div>
+    <script>
+        const app = new Vue({
+            el: '#app',
+            data: {
+
+            },
+            methods: {
+                
+            },
+            // 生命周期
+            beforeCreate() {
+                // 初始化之前，数据都未准备好
+            },
+            created() {
+                // 初始化完成，可在此处理数据
+            },
+            beforeMount() {
+                // 挂载之前（创建DOM之前），只有虚拟DOM
+            },
+            mounted() {
+                // 挂载之前（创建DOM之后），可以操作DOM
+            },
+            beforeUpdate() {
+                // 循环更新，更新之前
+            },
+            updated() {
+                // 循环更新，更新之后
+            },
+            beforeDestroy() {
+                // 销毁实例之前
+            },
+            destroyed() {
+                // 销毁实例之后
+            },
+        });
+    </script>
+</body>
+
+</html>
