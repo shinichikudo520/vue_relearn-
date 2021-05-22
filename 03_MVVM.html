@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <!-- 开发环境版本，包含了有帮助的命令行警告 -->
+    <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+</head>
+
+<body>
+    <div id="app">
+        <h1>
+            MVVM: Model View ViewModel
+        </h1>
+        <div>
+            <h2>
+                View层:
+            </h2>
+            <ul>
+                <li>视图层</li>
+                <li>在我们前端开发中，通常是指DOM层</li>
+                <li>主要的作用是给用户展示各种信息</li>
+            </ul>
+        </div>
+        <div>
+            <h2>
+                Model层:
+            </h2>
+            <ul>
+                <li>数据层</li>
+                <li>数据可能是我们固定的死数据，更多的是来自服务器，从网络上请求下来的数据</li>
+            </ul>
+        </div>
+        <div>
+            <h2>
+                ViewModel层:
+            </h2>
+            <ul>
+                <li>视图模型层</li>
+                <li>视图模型层是View和Model之间沟通的桥梁</li>
+                <li>一方面它实现了Data Binding，也就是数据绑定，将Model的改变实时反应到View中</li>
+                <li>另一方面它实现了DOM Listener，也就是DOM监听，当DOM发生了一些事件（点击，滚动，touch）时，可以监听到，并在需要的情况下改变对应的data</li>
+            </ul>
+        </div>
+
+    </div>
+    <script>
+        const app = new Vue({
+            el: '#app',
+            data: {
+
+            }
+        });
+    </script>
+</body>
+
+</html>
