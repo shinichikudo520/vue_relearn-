@@ -13,6 +13,7 @@
 <body>
     <div id="app">
         <div>{{fullName}}</div>
+        <div>书的总价格：{{totalPrice}}</div>
     </div>
     <script>
         const app = new Vue({
@@ -20,6 +21,12 @@
             data: {
                 firstName:'蓝',
                 lastName:'忘机',
+                books:[
+                    {id:1,name:'Unix编程艺术',price:119},
+                    {id:2,name:'代码大全',price:105},
+                    {id:3,name:'深入理解计算机原理',price:98},
+                    {id:4,name:'现代操作系统',price:87},
+                ],
             },
             methods: {
                 
@@ -28,6 +35,9 @@
                 // 计算属性
                 fullName(){
                     return this.firstName + this.lastName;
+                },
+                totalPrice(){
+                    return this.books.reduce((total,curVal)=>total + curVal.price,0);
                 }
             }
         });
