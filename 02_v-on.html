@@ -16,22 +16,66 @@
         <!-- v-on绑定事件：v-on:指定事件名称 -->
         <button v-on:click="increment">+</button>
         <!-- 语法糖：@事件名称 -->
-        <button @click="sub">-</button>
+        <button @click="decrement">-</button>
+        <!-- 函数的参数问题 -->
+        <button @click="btn1">按钮1</button>
+        <!-- $event可以拿到浏览器的Event对象 -->
+        <button @click="btn2(123,$event)">按钮2</button>
+        <!-- V-on的函数也可以直接获取到Data中数据 a 来作为参数 -->
+        <button @click="btn2(a,$event)">按钮2</button>
+        <!-- 修饰符 -->
+        <div @click="divClick">
+            <!-- 
+                stop:阻止默认行为,e.stopPropagation()
+                prevent:阻止默认行为,e.preventDefault()
+             -->
+            <button @click.stop="btn3(a,$event)">按钮3</button>
+            <form action="#">
+                <input type="submit" value="submit" @click.prevent.stop="submitClick">
+            </form>
+        </div>
+        <!-- keyCode | keyAlias，只当事件从特定的键触发时才执行 -->
+        <input type="text" @keyup.enter="keyupFn">
+        <!-- once，只监听一次 -->
+        <button @click.once="btn4(a,$event)">按钮4</button>
     </div>
     <script>
         const app = new Vue({
             el: '#app',
             data: {
                 counter: 0,
+                a:123,
             },
             methods: {
                 increment() {
                     this.counter++;
                     console.log('increment....');
                 },
-                sub() {
+                decrement() {
                     this.counter--;
-                    console.log('sub....');
+                    console.log('decrement....');
+                },
+                /** 默认传入了事件对象 */
+                btn1(e){
+                    console.log('btn1...',e);
+                },
+                btn2(a,e){
+                    console.log('btn2...',a,e);
+                },
+                btn3(a,e){
+                    console.log('btn3...',a,e);
+                },
+                divClick(){
+                    console.log('div click...');
+                },
+                submitClick(){
+                    console.log('submitClick...');
+                },
+                keyupFn(){
+                    console.log('keyup...');
+                },
+                btn4(a,e){
+                    console.log('btn4...',a,e);
                 },
             },
         });
