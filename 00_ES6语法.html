@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <button>按钮1</button>
+    <button>按钮2</button>
+    <button>按钮3</button>
+    <button>按钮4</button>
+    <button>按钮5</button>
+    <script>
+        // 1.变量作用域：变量在什么范围内可用
+        // var 不受块级作用域控制
+        {
+            var name = 'aaaaa';
+            console.log(name);
+        }
+        console.log(name);
+
+        var btns = document.getElementsByTagName('button');
+        for (var i = 0; i < btns.length; i++) {
+            var btn = btns[i];
+            btn.addEventListener('click',function(){
+                console.log('按钮' + i + '被点击了...'); // 点击按钮 1 输出  按钮 5 ，由于var声明的i不受块级作用域作用，被外层的For循环改成了5
+            });
+        }
+
+
+        // 2. const:声明常量，不能修改值，必须有初始值
+        // 但是常量对象能修改属性
+        const data = '蓝忘机';
+        const obj = {
+            name : '魏无羡',
+            age : 16,
+        }
+        obj.age = 17;
+        console.log(obj);
+
+
+        // 3. 对象的增强写法
+        const aaa = '晓星尘';
+        const bbb = 17;
+        const run = function(){
+                console.log('running...');
+            };
+        const obj1 = {
+            aaa,
+            bbb,
+            run,
+        }
+        console.log(obj1);
+
+        obj1.run()
+
+    </script>
+</body>
+</html>
