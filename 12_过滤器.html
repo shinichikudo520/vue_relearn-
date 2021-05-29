@@ -38,6 +38,7 @@
                 </tr>
             </tbody>
         </table>
+        <div>总价格：{{totalPrice | showPrice}}</div>
     </div>
     <script>
         const app = new Vue({
@@ -77,6 +78,9 @@
             },
             computed:{
                 // 计算属性
+                totalPrice(){
+                    return this.books.reduce((total,item) =>{return total + item.price * item.num} ,0);
+                }
             },
             methods: {
                 // 方法
