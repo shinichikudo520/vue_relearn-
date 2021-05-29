@@ -14,6 +14,7 @@
     <div id="app">
         <ul>
             <!-- 
+                3. 
                 !important：使用v-for，最好给遍历的元素加上key属性,原因就是key属性的值是否相同决定虚拟dom对可复用结构是否重新渲染
                 !important：key的作用主要是为了更高效的更新虚拟DOM
                 !important：key的值需要是唯一的，不同的
@@ -22,13 +23,14 @@
                 其实直接插入一个li元素即可，但是根据diff算法对比后的结果，会将原本1位置的'魔道祖师'改为'aaa'，'天官赐福'改为'魔道祖师'，'人渣反派自救系统'改为 '天官赐福'，最后再添加一个新的li元素，为'人渣反派自救系统'
                 会更为复杂，性能更差
              -->
-            <!-- 遍历数组 -->
+            <!-- 1. 遍历数组 -->
             <li v-for="(item,index) in movies" :style="{fontSize:index % 2 === 0?'50px':'12px',color:index % 2 === 0?'red':'blue'}" :key="item">{{index + 1}}. {{item}}</li>
         </ul>
         <ul>
-            <!-- 遍历对象 -->
+            <!-- 2. 遍历对象 -->
             <li v-for="(val,key) in info" :key="val">{{key}}:{{val}}</li>
         </ul>
+        <button @click="btnClick">按钮</button>
     </div>
     <script>
         const app = new Vue({
@@ -42,7 +44,27 @@
                 }
             },
             methods: {
-               
+                btnClick(){
+                    // 4. !important：数组响应式的方法
+                    // push
+                    // this.movies.push('aaa');
+                    // // pop
+                    // this.movies.pop();
+                    // // shift
+                    // this.movies.shift();
+                    // // unshift
+                    // this.movies.unshift('bbb');
+
+                    // splice()
+                    // sort()
+                    // reverse()
+
+                    // !important：直接通过索引修改数组中的元素无法响应到页面
+                    this.movies[0] = 'cccc';
+                    // vue提供了set方法,可及时响应到页面
+                    Vue.set(this.movies,1,'dddd');
+
+                }
             },
         });
     </script>
