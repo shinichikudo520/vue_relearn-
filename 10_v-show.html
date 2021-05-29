@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <!-- 开发环境版本，包含了有帮助的命令行警告 -->
+    <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+</head>
+
+<body>
+    <div id="app">
+        <div v-if="isShow">{{message}}</div>
+        <div v-show="isShow">{{message}}</div>
+        <!-- 
+            v-if为false时，v-if指定的元素，不会显示在Dom中。显示隐藏切换频率低时使用v-show
+            v-show为false时，v-show指定的元素，会显示在Dom中，只是有样式display:none; 显示隐藏切换频率高时使用v-show
+         -->
+        <div v-if="isShow1">{{message}}</div>
+        <div v-show="isShow1">{{message}}</div>
+    </div>
+    <script>
+        const app = new Vue({
+            el: '#app',
+            data: { 
+                // 数据管理
+                message:'你好吖~',
+                isShow:true,
+                isShow1:false,
+            },
+            computed:{
+                // 计算属性
+            },
+            methods: {
+                // 方法
+            },
+        });
+    </script>
+</body>
+
+</html>
