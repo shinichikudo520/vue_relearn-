@@ -13,12 +13,21 @@
 <body>
     <div id="app">
         <ul>
+            <!-- 
+                !important：使用v-for，最好给遍历的元素加上key属性,原因就是key属性的值是否相同决定虚拟dom对可复用结构是否重新渲染
+                !important：key的作用主要是为了更高效的更新虚拟DOM
+                !important：key的值需要是唯一的，不同的
+                virtual DOM底层通过diff算法对比，对于相同的元素，尽可能复用，优化性能
+                但是对于遍历而言，比如在数组movies中下标为1的位置插入一个元素'aaa'，
+                其实直接插入一个li元素即可，但是根据diff算法对比后的结果，会将原本1位置的'魔道祖师'改为'aaa'，'天官赐福'改为'魔道祖师'，'人渣反派自救系统'改为 '天官赐福'，最后再添加一个新的li元素，为'人渣反派自救系统'
+                会更为复杂，性能更差
+             -->
             <!-- 遍历数组 -->
-            <li v-for="(item,index) in movies" :style="{fontSize:index % 2 === 0?'50px':'12px',color:index % 2 === 0?'red':'blue'}">{{index + 1}}. {{item}}</li>
+            <li v-for="(item,index) in movies" :style="{fontSize:index % 2 === 0?'50px':'12px',color:index % 2 === 0?'red':'blue'}" :key="item">{{index + 1}}. {{item}}</li>
         </ul>
         <ul>
             <!-- 遍历对象 -->
-            <li v-for="(val,key) in info">{{key}}:{{val}}</li>
+            <li v-for="(val,key) in info" :key="val">{{key}}:{{val}}</li>
         </ul>
     </div>
     <script>
