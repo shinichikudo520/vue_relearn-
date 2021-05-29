@@ -13,14 +13,24 @@
 <body>
     <div id="app">
         <ul>
+            <!-- 遍历数组 -->
             <li v-for="(item,index) in movies" :style="{fontSize:index % 2 === 0?'50px':'12px',color:index % 2 === 0?'red':'blue'}">{{index + 1}}. {{item}}</li>
+        </ul>
+        <ul>
+            <!-- 遍历对象 -->
+            <li v-for="(val,key) in info">{{key}}:{{val}}</li>
         </ul>
     </div>
     <script>
         const app = new Vue({
             el: '#app',
             data: {
-                movies: ['陈情令', '魔道祖师', '天官赐福', '人渣反派自救系统'] 
+                movies: ['陈情令', '魔道祖师', '天官赐福', '人渣反派自救系统'],
+                info:{
+                    name:'蓝忘机',
+                    age:16,
+                    height:1.80
+                }
             },
             methods: {
                
