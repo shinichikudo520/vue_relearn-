@@ -1,0 +1,100 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <!-- 开发环境版本，包含了有帮助的命令行警告 -->
+    <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+</head>
+
+<body>
+    <div id="app">
+        <table border="1" cellspacing="0" cellpadding="5px">
+            <thead>
+                <th></th>
+                <th>书籍名称</th>
+                <th>出版日期</th>
+                <th>price</th>
+                <th>购买数量</th>
+                <th>操作</th>
+            </thead>
+            <tbody>
+                <tr v-for="item in books" :key="item.id">
+                    <td>{{item.id}}</td>
+                    <td>{{item.name}}</td>
+                    <td>{{item.date}}</td>
+                    <td>{{item.price | showPrice}}</td>
+                    <td>
+                        <button>+</button>
+                        {{item.num}}
+                        <button>-</button>
+                    </td>
+                    <td>
+                        <button>移除</button>
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+        <div>总价格：{{totalPrice | showPrice}}</div>
+    </div>
+    <script>
+        const app = new Vue({
+            el: '#app',
+            data: { 
+                // 数据管理
+                books:[
+                    {
+                        id:1,
+                        name:'《算法导论》',
+                        date:'2006-9',
+                        price:85.00,
+                        num:1,
+                    },
+                    {
+                        id:2,
+                        name:'《UNIX编程艺术》',
+                        date:'2006-2',
+                        price:59.00,
+                        num:1,
+                    },
+                    {
+                        id:3,
+                        name:'《编程珠玑》',
+                        date:'2008-10',
+                        price:119.00,
+                        num:1,
+                    },
+                    {
+                        id:4,
+                        name:'《代码大全》',
+                        date:'2006-3',
+                        price:205.00,
+                        num:1,
+                    },
+                ],
+            },
+            computed:{
+                // 计算属性
+                totalPrice(){
+                    // 1. reduce：array.reduce((total,item,index,array) => {return total + item},initVal);
+                    return this.books.reduce((total,item) =>{return total + item.price * item.num} ,0);
+                }
+            },
+            methods: {
+                // 方法
+            },
+            filters:{
+                // 过滤器：会将管道前面的数据作为参数传入，返回经过处理后的数据
+                // 格式 {{data | 过滤器}}
+                showPrice(price){
+                    return '￥' + price.toFixed(2);
+                }
+            }
+        });
+    </script>
+</body>
+
+</html>
