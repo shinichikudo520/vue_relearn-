@@ -22,6 +22,7 @@
         <div>
             <span v-if="isUser">
                 <label for="userName">用户账号</label>
+                <!-- !important：key属性的值是否相同决定虚拟dom对可复用结构是否重新渲染 -->
                 <!-- !important：添加一个key属性，可以让vue底层根据虚拟dom渲染结构的时候，决定是否复用该结构，key相同则复用，不同则不复用 -->
                 <!-- 此处userName的input与下面email的input在虚拟dom中是一个互斥的结构，在不声明不同key的情况下，出于性能考虑，在切换时vue不会重新渲染一次input，会进行复用，只会把不同的属性进行替换，
                     现象就是，先在input中输入值，点击切换，发现input的id，placeholder等属性都发生了改变，但是之前输入的值还在，就是因为虚拟dom复用了input结构，
