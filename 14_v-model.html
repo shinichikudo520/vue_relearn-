@@ -10,18 +10,92 @@
   </head>
 
   <body>
-    <div id="app"></div>
+    <div id="app">
+      <!-- 1. 双向绑定：v-model -->
+      <input type="text" v-model="message" />
+      {{message}}
+      <input type="text" :value="message" @input="inputChange" />
+      <!-- 
+        2. 双向绑定的原理
+          将 数据 message 绑定在 input的value属性上，使数据发生变化时，input的值能跟随发生变化
+          绑定 input元素的input事件，将input的修改值 实时更改到数据 message，
+          从而达到双向绑定
+      -->
+
+      <!-- 
+        3. input：radio使用v-model
+          使用v-model后可以省略 name 属性来声明radio是属于同一组单选元素
+      -->
+      <div>
+        <label for="male">
+          <input type="radio" id="male" value="男" v-model="sex" />男
+        </label>
+        <label for="female">
+          <input type="radio" id="female" value="女" v-model="sex" />女
+        </label>
+        <div>选择的是：{{sex}}</div>
+      </div>
+
+      <!-- 
+        4. input：checkbox使用v-model
+       -->
+      <div>
+        <!-- 单选 -->
+        <label for="agree">
+          <input type="checkbox" id="agree" v-model="agree" />同意协议
+        </label>
+        <div>选择的是：{{agree}}</div>
+      </div>
+      <div>
+        <!-- 多选 -->
+        <input type="checkbox" value="篮球" v-model="hobbies" />篮球
+        <input type="checkbox" value="足球" v-model="hobbies" />足球
+        <input type="checkbox" value="羽毛球" v-model="hobbies" />羽毛球
+        <input type="checkbox" value="乒乓球" v-model="hobbies" />乒乓球
+        <div>选择的是：{{hobbies}}</div>
+      </div>
+
+      <!-- 5. select使用v-model -->
+      <div>
+        <!-- 单选 -->
+        <select name="" v-model="hobby">
+          <option value="篮球">篮球</option>
+          <option value="足球">足球</option>
+          <option value="羽毛球">羽毛球</option>
+          <option value="乒乓球">乒乓球</option>
+        </select>
+        <div>选择的是：{{hobby}}</div>
+        <!-- 多选 -->
+        <select name="" id="hobbies" multiple v-model="hobbies1">
+          <option value="篮球">篮球</option>
+          <option value="足球">足球</option>
+          <option value="羽毛球">羽毛球</option>
+          <option value="乒乓球">乒乓球</option>
+        </select>
+        <div>选择的是：{{hobbies1}}</div>
+      </div>
+    </div>
+
     <script>
       const app = new Vue({
         el: "#app",
         data: {
           // 数据管理
+          message: "你好啊",
+          sex: "男",
+          agree: false,
+          hobbies: [],
+          hobby: "",
+          hobbies1: [],
         },
         computed: {
           // 计算属性
         },
         methods: {
           // 方法
+          inputChange(event) {
+            this.message = event.target.value;
+          },
         },
         filters: {
           // 过滤器：会将管道前面的数据作为参数传入，返回经过处理后的数据
