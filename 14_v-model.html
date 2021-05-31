@@ -74,6 +74,14 @@
         </select>
         <div>选择的是：{{hobbies1}}</div>
       </div>
+
+      <!-- 6. 值绑定：就是v-for/v-bind生成初始化的input-checkbox -->
+      <div>
+        <label v-for="item in originHobbies">
+          <input type="checkbox" :value="item" v-model="hobbies2" />{{item}}
+        </label>
+        <div>选择的是：{{hobbies2}}</div>
+      </div>
     </div>
 
     <script>
@@ -87,6 +95,8 @@
           hobbies: [],
           hobby: "",
           hobbies1: [],
+          originHobbies: ["篮球", "足球", "羽毛球", "乒乓球"],
+          hobbies2: [],
         },
         computed: {
           // 计算属性
