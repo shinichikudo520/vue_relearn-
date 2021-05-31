@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+    <!-- 开发环境版本，包含了有帮助的命令行警告 -->
+    <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+  </head>
+
+  <body>
+    <div id="app">
+      <!-- 3. 使用组件 -->
+      <my-cpn></my-cpn>
+    </div>
+    <script>
+      // 1. 创建组件
+      const cpn = Vue.extend({
+        template: `
+            <div>
+                <h2>我是标题</h2>
+                <p>我是内容，哈哈哈哈</p>
+                <p>我是内容，呵呵呵呵</p>    
+            </div>
+          `,
+      });
+      // 2. 注册组件
+      Vue.component("my-cpn", cpn);
+      const app = new Vue({
+        el: "#app",
+        data: {
+          // 数据管理
+        },
+        computed: {
+          // 计算属性
+        },
+        methods: {
+          // 方法
+        },
+        filters: {
+          // 过滤器：会将管道前面的数据作为参数传入，返回经过处理后的数据
+          // 格式 {{data | 过滤器}}
+        },
+      });
+    </script>
+  </body>
+</html>
