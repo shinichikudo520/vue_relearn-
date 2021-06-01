@@ -1,0 +1,131 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+    <!-- 开发环境版本，包含了有帮助的命令行警告 -->
+    <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+  </head>
+
+  <body>
+    <div id="app">
+      <!-- 2.2 在使用子组件的地方将子组件声明的变量作为属性绑定，传入父组件中的数据 -->
+      <cpn :cmovies="movies" :cmessage="message" :c-info="info"></cpn>
+    </div>
+    <template id="cpn">
+      <div>
+        <h2>{{title}}</h2>
+        <p>我是内容，哈哈哈哈</p>
+        <div>
+          <h2>当前计数：{{counter}}</h2>
+          <button @click="increment">+</button>
+          <button @click="decrement">-</button>
+        </div>
+        <!-- 2.3 在子组件中使用声明的变量 -->
+        <div>cmessage：{{cmessage}}</div>
+        <div>电影：{{cmovies}}</div>
+        <ul>
+          <li v-for="item in cmovies">{{item}}</li>
+        </ul>
+        <div>
+          <ul>
+            <li v-for="(item,key) in cInfo" :key="item">{{key}}:{{item}}</li>
+          </ul>
+        </div>
+      </div>
+    </template>
+    <script>
+      const cpn = Vue.extend({
+        template: "#cpn",
+        // 1. 组件中的数据存储
+        /**
+         * data必须是一个函数，且返回一个对象，在对象中声明变量
+         * data为什么必须是函数？保证组件内的数据各自独立，互不影响
+         */
+        data() {
+          return {
+            title: "我是标题",
+            counter: 0,
+          };
+        },
+        // 2. 通信：父传子,父组件传递参数给子组件
+        // 2.1 在子组件中的props属性声明变量
+        // 3. props的写法
+        // 3.1 数组
+        // props: ["cmovies"],
+        // 3.2 对象，对象写法可以声明变量类型，默认值，是否必传以及一个验证器validator(有validator时 值就是必传的)
+        props: {
+          cmovies: Array,
+          cmessage: {
+            type: String,
+            default: "aaaaaa",
+            required: false,
+            // validator(val) {},
+          },
+          cmultype: [Number, String],
+          carr: {
+            type: Array,
+            default() {
+              // 如果属性给与默认值，且默认值是数组或者对象时，必须要使用函数的方式将数组和对象作为返回值
+              return [];
+            },
+            required: false,
+            // validator(val) {},
+          },
+          cdata: {
+            type: String,
+            default: "",
+            required: false,
+            // validator(val) {
+            //   // 值验证，传入的值必须是以下字符串其中的一个
+            //   return ["aaaa", "bbbb", "cccc"].indexOf(val) !== -1;
+            // },
+          },
+          // 4. 由于vue的v-bind:属性名称的语法中，属性名称不支持驼峰命名，所以当props声明的变量为驼峰命名的变量时，需要特殊处理，写成v-bind:c-info
+          cInfo: {
+            type: Object,
+            default() {
+              return {};
+            },
+          },
+        },
+        methods: {
+          increment() {
+            this.counter++;
+          },
+          decrement() {
+            this.counter--;
+          },
+        },
+      });
+      const app = new Vue({
+        el: "#app",
+        data: {
+          // 数据管理
+          movies: ["陈情令", "魔道祖师", "天官赐福", "人渣反派自救系统"],
+          message: "你好啊！",
+          info: {
+            name: "蓝忘机",
+            age: 16,
+            lover: "魏无羡",
+          },
+        },
+        computed: {
+          // 计算属性
+        },
+        methods: {
+          // 方法
+        },
+        filters: {
+          // 过滤器：会将管道前面的数据作为参数传入，返回经过处理后的数据
+          // 格式 {{data | 过滤器}}
+        },
+        components: {
+          cpn,
+        },
+      });
+    </script>
+  </body>
+</html>
