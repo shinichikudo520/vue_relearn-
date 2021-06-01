@@ -14,7 +14,22 @@
       <cpn2></cpn2>
       <cpn3></cpn3>
       <cpn4></cpn4>
+      <cpn5></cpn5>
+      <cpn6></cpn6>
     </div>
+    <!-- 3. 模板的抽离写法 -->
+    <script type="text/x-template" id="cpn5">
+      <div>
+          <h2>我是标题5</h2>
+          <p>我是内容，555555555</p>
+      </div>
+    </script>
+    <template id="cpn6">
+      <div>
+        <h2>我是标题6</h2>
+        <p>我是内容，666666666</p>
+      </div>
+    </template>
     <script>
       // 1. 父子组件
       // 子组件
@@ -50,6 +65,10 @@
           `,
       });
 
+      Vue.component("cpn5", {
+        template: "#cpn5",
+      });
+
       const app = new Vue({
         el: "#app",
         data: {
@@ -76,6 +95,9 @@
                 <p>我是内容，噗噗噗</p>   
             </div>
           `,
+          },
+          cpn6: {
+            template: "#cpn6",
           },
         },
       });
