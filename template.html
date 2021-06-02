@@ -11,7 +11,15 @@
 
   <body>
     <div id="app"></div>
+    <template id="cpn">
+      <div></div>
+    </template>
     <script>
+      // 子组件
+      const cpn = {
+        template: "#cpn",
+      };
+      // 父组件
       const app = new Vue({
         el: "#app",
         data: {
@@ -29,6 +37,7 @@
         },
         components: {
           // 组件
+          cpn,
         },
         watch: {
           // 监听数据的变化

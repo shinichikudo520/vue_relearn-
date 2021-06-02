@@ -1,0 +1,105 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+    <!-- 开发环境版本，包含了有帮助的命令行警告 -->
+    <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+  </head>
+
+  <body>
+    <div id="app">
+      {{name}}
+      <cpn ref="aaa"></cpn>
+      <cpn ref="bbb"></cpn>
+      <cpn ref="ccc"></cpn>
+      <button @click="btnClick">按钮</button>
+      <button @click="btnClick1">按钮1</button>
+    </div>
+    <template id="cpn">
+      <div>{{name}}<button>子组件按钮</button><ccpn></ccpn></div>
+    </template>
+    <template id="ccpn">
+      <div>{{name}}<button @click="ccBtnClick">子子组件按钮</button></div>
+    </template>
+    <script>
+      // 子子组件
+      const ccpn = {
+        template: "#ccpn",
+        data() {
+          return {
+            name: "我是子子组件!",
+          };
+        },
+        methods: {
+          showMsg() {
+            console.log(11111, "ccpn....");
+          },
+          ccBtnClick() {
+            // 3. 子组件访问父组件：$parent，不建议使用，会使组件之间耦合度太高
+            console.log("父组件...", this.$parent);
+            // 4. 访问根组件：vue实例
+            console.log("vue实例...", this.$root);
+          },
+        },
+      };
+      // 子组件
+      const cpn = {
+        template: "#cpn",
+        data() {
+          return {
+            name: "我是子组件!",
+          };
+        },
+        methods: {
+          showMsg() {
+            console.log(11111, "cpn....");
+          },
+        },
+        components: {
+          ccpn,
+        },
+      };
+      // 父组件
+      const app = new Vue({
+        el: "#app",
+        data: {
+          // 数据管理
+          name: "我是父组件!",
+        },
+        computed: {
+          // 计算属性
+        },
+        methods: {
+          // 方法
+          btnClick() {
+            // 1. 父访问子组件(数组)：$children
+            console.log(this.$children);
+            this.$children[0].showMsg();
+            console.log("子组件的name...", this.$children[0].name);
+          },
+          btnClick1() {
+            // 2. 父访问子组件(对象)：$refs
+            // 2.1 在子组件上绑定ref属性，相当于给子组件取名，在$refs对象形成{key:value}的映射关系
+            // 2.2 根据 this.$refs[ref属性绑定名称]访问子组件
+            console.log(this.$refs);
+            console.log(this.$refs["aaa"].name);
+          },
+        },
+        filters: {
+          // 过滤器：会将管道前面的数据作为参数传入，返回经过处理后的数据
+          // 格式 {{data | 过滤器}}
+        },
+        components: {
+          // 组件
+          cpn,
+        },
+        watch: {
+          // 监听数据的变化
+        },
+      });
+    </script>
+  </body>
+</html>
