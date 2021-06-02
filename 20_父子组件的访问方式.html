@@ -19,7 +19,7 @@
       <button @click="btnClick1">按钮1</button>
     </div>
     <template id="cpn">
-      <div>{{name}}<button>子组件按钮</button><ccpn></ccpn></div>
+      <div>{{name}}<ccpn></ccpn></div>
     </template>
     <template id="ccpn">
       <div>{{name}}<button @click="ccBtnClick">子子组件按钮</button></div>
