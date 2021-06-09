@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+    <!-- 开发环境版本，包含了有帮助的命令行警告 -->
+    <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+  </head>
+
+  <body>
+    <div id="app">
+      <cpn>
+        <!-- 2. 填充插槽内容 -->
+        <i>呵呵呵</i>
+      </cpn>
+      <cpn></cpn>
+      <cpn></cpn>
+      <cpn></cpn>
+    </div>
+    <template id="cpn">
+      <div>
+        <h2>我是组件</h2>
+        <div>哈哈哈哈哈哈哈哈</div>
+        <!-- !important slot插槽是用于扩展组件的 -->
+        <!-- 1. 声明插槽,预留插槽位置 -->
+        <slot>
+          <!-- 3. 插槽内可以设置默认值 -->
+          <button>按钮</button>
+        </slot>
+      </div>
+    </template>
+    <script>
+      // 子组件
+      const cpn = {
+        template: "#cpn",
+      };
+      // 父组件
+      const app = new Vue({
+        el: "#app",
+        data: {
+          // 数据管理
+        },
+        computed: {
+          // 计算属性
+        },
+        methods: {
+          // 方法
+        },
+        filters: {
+          // 过滤器：会将管道前面的数据作为参数传入，返回经过处理后的数据
+          // 格式 {{data | 过滤器}}
+        },
+        components: {
+          // 组件
+          cpn,
+        },
+        watch: {
+          // 监听数据的变化
+        },
+      });
+    </script>
+  </body>
+</html>
