@@ -18,17 +18,35 @@
   <body>
     <div id="app">
       <cpn></cpn>
+      <cpn>
+        <!-- 2. 要访问slot绑定的数据,固定写法 -->
+        <div slot-scope="slot">
+          <!-- 3. 可以通过slot.数据名称访问传递的数据 -->
+          <span v-for="item in slot.movies">{{item}} </span>
+        </div>
+      </cpn>
+      <cpn></cpn>
+      <cpn></cpn>
     </div>
     <template id="cpn">
       <div class="cpn">
-        <h2>我是子组件</h2>
-        <div>哈哈哈</div>
+        <!-- 1. slot是可以绑定数据的 :数据名称="数据" -->
+        <slot :movies="movies">
+          <ul>
+            <li v-for="item in movies">{{item}}</li>
+          </ul>
+        </slot>
       </div>
     </template>
     <script>
       // 子组件
       const cpn = {
         template: "#cpn",
+        data() {
+          return {
+            movies: ["陈情令", "魔道祖师", "天官赐福", "人渣反派自救系统"],
+          };
+        },
       };
       // 父组件
       const app = new Vue({
