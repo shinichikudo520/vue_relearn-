@@ -1,33 +1,49 @@
 <!DOCTYPE html>
 <html lang="en">
-
-<head>
-    <meta charset="UTF-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Document</title>
     <!-- 开发环境版本，包含了有帮助的命令行警告 -->
     <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
-</head>
+  </head>
 
-<body>
-    <div id="app">
-
-    </div>
+  <body>
+    <div id="app"></div>
     <script>
-        const app = new Vue({
-            el: '#app',
-            data: { 
-                // 数据管理
-            },
-            computed:{
-                // 计算属性
-            },
-            methods: {
-                // 方法
-            },
-        });
+      const app = new Vue({
+        el: "#app",
+        data: {
+          // 数据管理
+          letters: [],
+        },
+        computed: {
+          // 计算属性
+        },
+        methods: {
+          // 方法
+          fn() {
+            //1.push
+            this.letters.push("f");
+            //2.pop()删除最后一个元素
+            //this.letters.pop()
+            //3.shift()删除第一个
+            //this.letters.shift()
+            //4.unshift()添加在最前面,可以添加多个
+            //this.letters.unshift('aaa','bbb','ccc')
+            //5.splice():删除元素/插入元素/替换元素
+            //splice(1,1)再索引为1的地方删除一个元素,第二个元素不传，直接删除后面所有元素
+            //splice(index,0,'aaa')再索引index后面删除0个元素，加上'aaa',
+            //splice(1,1,'aaa')替换索引为1的后一个元素为'aaa'
+            // this.letters.splice(2,0,'aaa')
+            //6.sort()排序可以传入一个函数
+            //this.letters.sort()
+            //7.reverse()反转
+            // this.letters.reverse()
+          },
+        },
+      });
     </script>
-</body>
-
+  </body>
 </html>
