@@ -40,11 +40,12 @@
                 // 方法一（常用）
                 fullName(){
                     // 计算属性会被vue内部缓存，会对相关的数据进行监听，只有相关数据发生变化，计算属性的方法才会调用一次
-                    console.log(11111111111111,fullName);
+                    console.log(11111111111111,fullName); // 只会输出 1 次
                     return this.firstName +' '+ this.lastName;
                 },
                 // 方法二
                 fullName1:{
+                    // 计算属性一般没有 set 方法, 即是只读属性
                     set(newValue){
                         console.log('-------------',newValue);
                         arr = newValue.split(' ');
